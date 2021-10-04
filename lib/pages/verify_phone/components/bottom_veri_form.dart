@@ -85,7 +85,7 @@ class _BottomVerifyFormState extends State<BottomVerifyForm> {
                           Navigator.pushNamed(
                               context, SmsVerificationScreen.routeName);
                           // API.createPhoneVerify(phoneNumber!);
-                          VerifyPhoneAPI.createPhoneVerify(phoneNumber!).then((author){
+                          VerifyPhoneAPI.createPhoneVerify(phoneNumber.toString()).then((author){
                             return null;
                           });
                         }

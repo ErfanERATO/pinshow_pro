@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pinshow_pro/Components/default_button.dart';
 import 'package:pinshow_pro/localization/language_constants.dart';
 import 'package:pinshow_pro/nework/send_sms_code_api.dart';
@@ -43,8 +44,8 @@ class _OtpFormState extends State<OtpForm> {
             text: getTranslated(context, 'button_text')!,
             press: () {
               Navigator.pushNamed(context, SignUpScreen.routeName);
-              SendSmsCodeAPI.createSendSmsCode(phoneNumber!, code!).then((author){
-                return const Text("yeah");
+              SendSmsCodeAPI.createSendSmsCode(phoneNumber.toString(), code.toString()).then((author){
+                return null;
               });
             },
           )
@@ -75,16 +76,29 @@ class _OtpFormState extends State<OtpForm> {
     return TextFormField(
       controller: phoneNumberController,
       onSaved: (newValue) => phoneNumber = newValue!,
+      onChanged: (value) {
+        setState(() {
+          phoneNumber = value;
+        });
+      },
       //اعتبار سنجی فرم
       validator: (value) {
         if (value!.isEmpty) {
-          return "Please add your number";
+          return getTranslated(context, 'add_number_error')!;
+        } else if (value.length < 10) {
+          return getTranslated(
+              context, 'phone_number_to_short_error')!;
         } else {
           return null;
         }
       },
-      decoration: const InputDecoration(
-        labelText: "phone number",
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(10),
+      ],
+      decoration: InputDecoration(
+        labelText:
+        getTranslated(context, 'phone_number_label')!,
+        suffixIcon: const Icon(Icons.call),
       ),
     );
   }

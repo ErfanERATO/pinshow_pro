@@ -37,7 +37,7 @@ class Data {
     required this.status,
   });
 
-  String mobile;
+  String? mobile;
   int status;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(

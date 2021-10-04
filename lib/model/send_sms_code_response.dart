@@ -17,8 +17,8 @@ class SendSmsCodeResponse {
     required this.data,
   });
 
-  bool success;
-  String message;
+  bool? success;
+  String? message;
   List<dynamic> data;
 
   factory SendSmsCodeResponse.fromJson(Map<String, dynamic> json) =>

@@ -5,7 +5,7 @@ import 'package:pinshow_pro/model/send_sms_code_response.dart';
 
 class SendSmsCodeAPI {
   static const String smsUrl =
-      'http://testapi.pinshow.ir/api/v1/verifyBackPhone';
+      'https://testapi.pinshow.ir/api/v1/verifyBackPhone';
 
   static Future<SendSmsCodeResponse> createSendSmsCode(
       String phone, String code) async {
@@ -13,8 +13,8 @@ class SendSmsCodeAPI {
       Uri.parse(smsUrl),
       headers: <String, String>{
         'Accept': 'application/json',
-        'X-localization': 'fa',
-        'Expect': '100-Continue'
+        'X-localization': 'en',
+        // 'Expect': '100-Continue',
       },
       body: {"phone": phone, "code": code},
     );
@@ -24,6 +24,7 @@ class SendSmsCodeAPI {
       return SendSmsCodeResponse.fromJson(json.decode(response.body));
     } else {
       print(response.statusCode);
+      print(response.body);
       throw Exception("Can't send Sms Code");
     }
   }
