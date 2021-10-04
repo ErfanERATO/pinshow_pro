@@ -1,0 +1,59 @@
+{
+    "side_logo_text": "Pinshow",
+    "bottom_logo_text": "Keep the people you love safe",
+
+    "button_text":"continue",
+
+    "welcome_to_app": "Welcome to the pinshow",
+    "bottom_welcome_text": "Sign in or sign up to get started",
+    "login": "Login",
+    "sign_up": "Sign up",
+
+    "login_header": "Login to account",
+    "remember_check_box": "Remember me",
+    "forgot_password": "Forgot your password",
+    "phone_number_label_text": "phone number",
+    "enter_password_error": "Please enter your password",
+    "enter_valid_password_error": "Please enter a valid password",
+    "password": "password",
+
+    "title": "Pinshow",
+
+    "forget_password_header": "Password recovery",
+
+    "register_phone_header": "Register",
+
+    "sms_verification_header": "Confirm user number",
+    "sms_verification_text_bottom_field": "A verification code was sent to your number",
+
+    "complete_form_header": "Complete information",
+    "confirm_password_error": "Please confirm your password",
+    "confirm_password_label_text": "confirm password",
+
+    "entered_email_invalid_error": "The entered email is invalid",
+    "entered_email_error": "please enter your Email",
+    "email": "email",
+
+    "enter_name_error": "Please enter your name",
+    "name_too_short_error": "The name entered is too short",
+    "name": "name",
+
+    "Do_not_have_account": "Don't have an account?",
+    "have_account": "Do you have an account?",
+
+    "add_number_error" : "please enter your number",
+    "phone_number_label" : "phone number",
+    "phone_number_to_short_error" : "phone number in to short",
+
+    "last_name_error" : "Please enter your last name",
+    "last_name_short_error" : "The last name entered is too short",
+    "last_name_label" : "last name",
+
+    "Do_you_have_an_account_Q" : "Do you have an account?",
+    "Do_you_have_an_account_A" : "Login",
+
+    "Do_not_have_an_account_Q" : "Don't have an account?",
+    "Do_not_have_an_account_A" : "Sign up"
+
+
+}
