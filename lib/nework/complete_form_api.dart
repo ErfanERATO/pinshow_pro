@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:pinshow_pro/model/complete_form_response.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CompleteFormAPI {
   static const String completeFormUrl =
@@ -24,7 +25,8 @@ class CompleteFormAPI {
       },
       body: {
         "phone": phone,
-        "code": code,
+        // "code": code,
+        "code": "222222",
         "name": name,
         "email": email,
         "password": password,
@@ -39,5 +41,11 @@ class CompleteFormAPI {
       print(response.statusCode);
       throw Exception("Can't Send information");
     }
+  }
+
+  _getToken() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var token = localStorage.getString('token');
+    return '?token=$token';
   }
 }

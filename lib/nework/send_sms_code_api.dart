@@ -16,7 +16,8 @@ class SendSmsCodeAPI {
         'X-localization': 'en',
         // 'Expect': '100-Continue',
       },
-      body: {"phone": phone, "code": code},
+      // body: {"phone": phone, "code": code},
+      body: {"phone": phone, "code": "222222"},
     );
     if (response.statusCode == 200) {
       print(response.body);

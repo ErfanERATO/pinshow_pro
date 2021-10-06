@@ -14,14 +14,12 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPassController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController codeController = TextEditingController();
-
 
   final _formKey = GlobalKey<FormState>();
   String? phone;
@@ -103,7 +101,14 @@ class _SignUpFormState extends State<SignUpForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 Navigator.pushNamed(context, HomePage.routeName);
-                CompleteFormAPI.createCompleteForm(phone!, code!, name!, email!, password!, password_confirmation!).then((author){
+                CompleteFormAPI.createCompleteForm(
+                  phone.toString(),
+                  code.toString(),
+                  name.toString(),
+                  email.toString(),
+                  password.toString(),
+                  password_confirmation.toString(),
+                ).then((author) {
                   return null;
                 });
               }
@@ -131,7 +136,7 @@ class _SignUpFormState extends State<SignUpForm> {
           return null;
         }
       },
-      decoration:  InputDecoration(
+      decoration: InputDecoration(
         labelText: getTranslated(context, 'confirm_password_label_text')!,
         suffixIcon: const Icon(Icons.lock),
       ),
@@ -185,7 +190,6 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-
   //فیلد ردیافت نام ورودی کاربر
   TextFormField buildNameFormField() {
     return TextFormField(
@@ -207,8 +211,6 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
     );
   }
-
-
 
   //_____________________________________________________
   TextFormField buildCodeFormField() {

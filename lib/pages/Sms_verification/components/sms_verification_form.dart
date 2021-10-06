@@ -18,10 +18,10 @@ class OtpForm extends StatefulWidget {
 
 class _OtpFormState extends State<OtpForm> {
   final TextEditingController codeController = TextEditingController();
-  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
   String? code;
-  String? phoneNumber;
+  String? phone;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -44,7 +44,9 @@ class _OtpFormState extends State<OtpForm> {
             text: getTranslated(context, 'button_text')!,
             press: () {
               Navigator.pushNamed(context, SignUpScreen.routeName);
-              SendSmsCodeAPI.createSendSmsCode(phoneNumber.toString(), code.toString()).then((author){
+              SendSmsCodeAPI.createSendSmsCode(
+                      phone.toString(), code.toString())
+                  .then((author) {
                 return null;
               });
             },
@@ -74,11 +76,11 @@ class _OtpFormState extends State<OtpForm> {
 
   TextFormField buildNumberFormField() {
     return TextFormField(
-      controller: phoneNumberController,
-      onSaved: (newValue) => phoneNumber = newValue!,
+      controller: phoneController,
+      onSaved: (newValue) => phone = newValue!,
       onChanged: (value) {
         setState(() {
-          phoneNumber = value;
+          phone = value;
         });
       },
       //اعتبار سنجی فرم
@@ -86,8 +88,7 @@ class _OtpFormState extends State<OtpForm> {
         if (value!.isEmpty) {
           return getTranslated(context, 'add_number_error')!;
         } else if (value.length < 10) {
-          return getTranslated(
-              context, 'phone_number_to_short_error')!;
+          return getTranslated(context, 'phone_number_to_short_error')!;
         } else {
           return null;
         }
@@ -96,8 +97,7 @@ class _OtpFormState extends State<OtpForm> {
         LengthLimitingTextInputFormatter(10),
       ],
       decoration: InputDecoration(
-        labelText:
-        getTranslated(context, 'phone_number_label')!,
+        labelText: getTranslated(context, 'phone_number_label')!,
         suffixIcon: const Icon(Icons.call),
       ),
     );
