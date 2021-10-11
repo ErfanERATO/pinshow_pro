@@ -74,6 +74,7 @@ class _BottomVerifyFormState extends State<BottomVerifyForm> {
                         labelText:
                             getTranslated(context, 'phone_number_label')!,
                         suffixIcon: const Icon(Icons.call),
+                        hintText: "9024040897",
                       ),
                     ),
                     SizedBox(height: getScreenHeight(60)),

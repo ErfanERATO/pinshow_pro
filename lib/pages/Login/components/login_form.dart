@@ -1,10 +1,11 @@
 //ساخت فرم و دکمه‌ی ثبت برای لاگین کردن
 //ــــــــــــــــــــــــــــــــــــــــــــــــــــ
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:flutter/services.dart';
 import 'package:pinshow_pro/Components/default_button.dart';
 import 'package:pinshow_pro/Components/no_account_text.dart';
 import 'package:pinshow_pro/localization/language_constants.dart';
+import 'package:pinshow_pro/nework/login_api.dart';
 import 'package:pinshow_pro/pages/Forget_password/forget_password_screen.dart';
 import 'package:pinshow_pro/size_config.dart';
 
@@ -16,7 +17,6 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -31,7 +31,7 @@ class _LoginFormState extends State<LoginForm> {
       key: _formKey,
       child: Column(
         children: <Widget>[
-          buildIntlPhoneField(),
+          buildPhoneField(),
           // buildPhoneNumberFormField(),
           //ایجاد فاصله بین دو فرم شماره تلفن و پسوورد
           SizedBox(height: getScreenHeight(10)),
@@ -66,14 +66,17 @@ class _LoginFormState extends State<LoginForm> {
             ],
           ),
           //ایجاد فاصله بین دکمه ثبت از عناصر بالای اون
-          SizedBox(height: getScreenHeight(270)),
+          SizedBox(height: getScreenHeight(300)),
+          //دکمه ادامه
           DefaultButton(
             text: getTranslated(context, 'button_text')!,
             press: () {
               debugPrint("Screens.Login pressed");
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                // _isLoading ? null : _login;
+                LoginApi.createLoginResponse(phoneNumber.toString(),password.toString()).then((author){
+                  return null;
+                });
               }
             },
           ),
@@ -87,18 +90,34 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  //intl_phone_fieldساخت فیلد وارد کردن شماره تلفن به همراه کد کشور با استفاده از پکیج
-  IntlPhoneField buildIntlPhoneField() {
-    return IntlPhoneField(
-      decoration: InputDecoration(
-        labelText: getTranslated(context, 'phone_number_label_text')!,
-      ),
-      onSaved: (newValue) => phoneNumber = newValue! as String,
-      initialCountryCode: 'IR',
-      onChanged: (phone) {
-        print(phone.completeNumber);
-      },
+  //ساخت فیلد وارد کردن شماره تلفن
+  TextFormField buildPhoneField() {
+    return TextFormField(
       controller: phoneNumberController,
+      onSaved: (newValue) => phoneNumber = newValue!,
+      onChanged: (value) {
+        setState(() {
+          phoneNumber = value;
+        });
+      },
+      //اعتبار سنجی فرم
+      validator: (value) {
+        if (value!.isEmpty) {
+          return getTranslated(context, 'add_number_error')!;
+        } else if (value.length < 10) {
+          return getTranslated(context, 'phone_number_to_short_error')!;
+        } else {
+          return null;
+        }
+      },
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(10),
+      ],
+      decoration: InputDecoration(
+        labelText: getTranslated(context, 'phone_number_label')!,
+        suffixIcon: const Icon(Icons.call),
+        hintText: "9024040897",
+      ),
     );
   }
 
@@ -118,7 +137,7 @@ class _LoginFormState extends State<LoginForm> {
       },
       decoration: InputDecoration(
         labelText: getTranslated(context, 'password')!,
-        // suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/Lock.svg"),
+        suffixIcon: const Icon(Icons.lock),
       ),
       controller: passwordController,
     );

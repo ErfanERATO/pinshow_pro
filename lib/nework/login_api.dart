@@ -1,31 +1,29 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:pinshow_pro/model/phone_verify_response.dart';
+import 'package:pinshow_pro/model/login_response_model.dart';
 
-class VerifyPhoneAPI {
-  static const String url = 'http://testapi.pinshow.ir/api/v1/verifyPhone';
+class LoginApi {
+  static const String url = 'http://testapi.pinshow.ir/api/v1/login';
 
-  static Future<VerifyPhoneResponse> createPhoneVerify(String phone) async {
+  static Future<LoginResponse> createLoginResponse(String phone , String password) async {
     // static Future<Response> createPhoneVerify(String phone) async {
     final Response response = await post(
       Uri.parse(url),
       headers: <String, String>{
         'Accept': 'application/json',
         'X-localization': 'fa',
-        'Expect': '100-Continue'
       },
-      // body: jsonEncode(<String, String>{"phone": phone}),
-      body: {"phone": phone},
+      body: {"phone": phone, "password" : password},
     );
     if (response.statusCode == 200) {
       print(response.body);
       print(response.statusCode);
-      return VerifyPhoneResponse.fromJson(json.decode(response.body));
+      return LoginResponse.fromJson(json.decode(response.body));
     } else {
       // print('Error');
       print(response.statusCode);
-      throw Exception("Can't Send Phone Number");
+      throw Exception("Can't get user information");
     }
     // return response;
   }
