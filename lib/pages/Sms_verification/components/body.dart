@@ -34,8 +34,15 @@ class Body extends StatelessWidget {
                     fontSize: 23,
                   ),
                 ),
-                SizedBox(
-                  height: getScreenHeight(100),
+                SizedBox(height: getScreenHeight(30)),
+                 Text(
+                  getTranslated(context, 'verification_code_send_to')!,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontFamily: ("assets/fonts/farsi/IRANYekanMobileBold.ttf"),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 15,
+                  ),
                 ),
                 const OtpForm(),
               ],

@@ -39,5 +39,7 @@
     "Do_you_have_an_account_Q" : "آیا حساب کاربری دارید؟",
     "Do_you_have_an_account_A" : "ورود",
     "Do_not_have_an_account_Q" : "آیا حساب کاربری ندارید؟",
-    "Do_not_have_an_account_A" : "ثبت‌نام"
+    "Do_not_have_an_account_A" : "ثبت‌نام",
+    "verification_code_send_to" : "کد تایید به شماره شما ارسال گردید",
+    "time_up_resend_code" : "فرصت شما تمام شد! ارسال مجدد کد"
 }

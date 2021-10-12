@@ -53,7 +53,10 @@
     "Do_you_have_an_account_A" : "Login",
 
     "Do_not_have_an_account_Q" : "Don't have an account?",
-    "Do_not_have_an_account_A" : "Sign up"
+    "Do_not_have_an_account_A" : "Sign up",
+
+    "verification_code_send_to" : "A verification code was sent to your number",
+    "time_up_resend_code" : "Time is up! Resend the code"
 
 
 }
