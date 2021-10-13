@@ -41,5 +41,7 @@
     "Do_not_have_an_account_Q" : "آیا حساب کاربری ندارید؟",
     "Do_not_have_an_account_A" : "ثبت‌نام",
     "verification_code_send_to" : "کد تایید به شماره شما ارسال گردید",
-    "time_up_resend_code" : "فرصت شما تمام شد! ارسال مجدد کد"
+    "time_up_resend_code" : "فرصت شما تمام شد! ارسال مجدد کد",
+    "add_sms_code_error" : "لطفا کد تاییدیه را وارد کنید",
+    "sms_code_label" : "کد پیامکی"
 }

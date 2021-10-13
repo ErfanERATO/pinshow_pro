@@ -56,7 +56,10 @@
     "Do_not_have_an_account_A" : "Sign up",
 
     "verification_code_send_to" : "A verification code was sent to your number",
-    "time_up_resend_code" : "Time is up! Resend the code"
+    "time_up_resend_code" : "Time is up! Resend the code",
+
+    "add_sms_code_error" : "Please add your code",
+    "sms_code_label" : "Sms code"
 
 
 }
