@@ -125,6 +125,7 @@ class _OtpFormState extends State<OtpForm> {
   final TextEditingController codeController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String? code;
+  String? phone;
 
   // FocusNode? pin2FocusNode;
   // FocusNode? pin3FocusNode;
@@ -310,6 +311,7 @@ class _OtpFormState extends State<OtpForm> {
     String code = codeController.text;
     saveConfirmSmsCode(code).then((bool committed) {
       Navigator.pushNamed(context, SignUpScreen.routeName);
+      getPhoneNumber();
     });
   }
 }
@@ -318,4 +320,10 @@ Future<bool> saveConfirmSmsCode(String code) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString("code", code);
   return prefs.commit();
+}
+
+Future<String?> getPhoneNumber() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? phone = prefs.getString("phone");
+  return phone;
 }
