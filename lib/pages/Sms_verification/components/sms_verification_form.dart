@@ -107,6 +107,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pinshow_pro/Components/default_button.dart';
 import 'package:pinshow_pro/localization/language_constants.dart';
+import 'package:pinshow_pro/nework/send_sms_code_api.dart';
+import 'package:pinshow_pro/pages/Complete_form/sign_up_screen.dart';
 import 'package:pinshow_pro/size_config.dart';
 
 class OtpForm extends StatefulWidget {
@@ -263,7 +265,7 @@ class _OtpFormState extends State<OtpForm> {
               inputFormatters: [
                 LengthLimitingTextInputFormatter(6),
               ],
-              decoration:  InputDecoration(
+              decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 labelText: getTranslated(context, 'sms_code_label')!,
                 suffixIcon: const Icon(Icons.sms_failed_outlined),
@@ -280,15 +282,24 @@ class _OtpFormState extends State<OtpForm> {
             child: Text(
               getTranslated(context, 'time_up_resend_code')!,
             ),
-            onPressed: () {},
+            onPressed: () {
+              debugPrint("didn't get code pressed");
+            },
           ),
           SizedBox(height: getScreenHeight(160)),
           DefaultButton(
             text: getTranslated(context, 'button_text')!,
             press: () {
-              debugPrint("didn't get code pressed");
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+                Navigator.pushNamed(context, SignUpScreen.routeName);
+                SendSmsCodeAPI.createSendSmsCode(code.toString())
+                    .then((author) {
+                  return null;
+                });
+              }
             },
-          )
+          ),
         ],
       ),
     );

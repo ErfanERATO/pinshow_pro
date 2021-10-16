@@ -8,7 +8,8 @@ class SendSmsCodeAPI {
       'https://testapi.pinshow.ir/api/v1/verifyBackPhone';
 
   static Future<SendSmsCodeResponse> createSendSmsCode(
-      String phone, String code) async {
+      // String phone, String code) async {
+       String code) async {
     final Response response = await post(
       Uri.parse(smsUrl),
       headers: <String, String>{
@@ -17,7 +18,7 @@ class SendSmsCodeAPI {
         // 'Expect': '100-Continue',
       },
       // body: {"phone": phone, "code": code},
-      body: {"phone": phone, "code": "222222"},
+      body: {"code": "222222"},
     );
     if (response.statusCode == 200) {
       print(response.body);

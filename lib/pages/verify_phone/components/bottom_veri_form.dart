@@ -6,6 +6,7 @@ import 'package:pinshow_pro/localization/language_constants.dart';
 import 'package:pinshow_pro/nework/phone_verify_api.dart';
 import 'package:pinshow_pro/pages/Sms_verification/sms_screen.dart';
 import 'package:pinshow_pro/size_config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BottomVerifyForm extends StatefulWidget {
   const BottomVerifyForm({Key? key}) : super(key: key);
@@ -83,11 +84,13 @@ class _BottomVerifyFormState extends State<BottomVerifyForm> {
                       press: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-                          Navigator.pushNamed(
-                              context, SmsVerificationScreen.routeName);
+                          // Navigator.pushNamed(
+                          //     context, SmsVerificationScreen.routeName)
                           // API.createPhoneVerify(phoneNumber!);
-                          VerifyPhoneAPI.createPhoneVerify(phoneNumber.toString()).then((author){
-                            return null;
+                          VerifyPhoneAPI.createPhoneVerify(
+                                  phoneNumber.toString())
+                              .then((author) {
+                            return savePhone();
                           });
                         }
                       },
@@ -103,4 +106,17 @@ class _BottomVerifyFormState extends State<BottomVerifyForm> {
       ),
     );
   }
+
+  void savePhone() {
+    String phone = phoneNumberController.text;
+    savePhoneNumber(phone).then((bool committed) {
+      Navigator.pushNamed(context, SmsVerificationScreen.routeName);
+    });
+  }
+}
+
+Future<bool> savePhoneNumber(String phone) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString("phone", phone);
+  return prefs.commit();
 }
