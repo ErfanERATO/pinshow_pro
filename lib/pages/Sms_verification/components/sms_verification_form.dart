@@ -110,6 +110,7 @@ import 'package:pinshow_pro/localization/language_constants.dart';
 import 'package:pinshow_pro/nework/send_sms_code_api.dart';
 import 'package:pinshow_pro/pages/Complete_form/sign_up_screen.dart';
 import 'package:pinshow_pro/size_config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OtpForm extends StatefulWidget {
   const OtpForm({
@@ -292,10 +293,10 @@ class _OtpFormState extends State<OtpForm> {
             press: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                Navigator.pushNamed(context, SignUpScreen.routeName);
+                // Navigator.pushNamed(context, SignUpScreen.routeName);
                 SendSmsCodeAPI.createSendSmsCode(code.toString())
                     .then((author) {
-                  return null;
+                  return saveSmsCode();
                 });
               }
             },
@@ -304,4 +305,17 @@ class _OtpFormState extends State<OtpForm> {
       ),
     );
   }
+
+  void saveSmsCode() {
+    String code = codeController.text;
+    saveConfirmSmsCode(code).then((bool committed) {
+      Navigator.pushNamed(context, SignUpScreen.routeName);
+    });
+  }
+}
+
+Future<bool> saveConfirmSmsCode(String code) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString("code", code);
+  return prefs.commit();
 }
