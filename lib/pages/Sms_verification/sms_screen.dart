@@ -14,6 +14,7 @@ class SmsVerificationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.indigo,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         title: Text(
           getTranslated(context, 'title')!,

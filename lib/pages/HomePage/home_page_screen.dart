@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.indigo,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           getTranslated(context, 'home_page_app_bar_title')!,
           style: const TextStyle(

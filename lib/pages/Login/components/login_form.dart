@@ -7,6 +7,7 @@ import 'package:pinshow_pro/Components/no_account_text.dart';
 import 'package:pinshow_pro/localization/language_constants.dart';
 import 'package:pinshow_pro/nework/login_api.dart';
 import 'package:pinshow_pro/pages/Forget_password/forget_password_screen.dart';
+import 'package:pinshow_pro/pages/HomePage/home_page_screen.dart';
 import 'package:pinshow_pro/size_config.dart';
 
 class LoginForm extends StatefulWidget {
@@ -75,7 +76,7 @@ class _LoginFormState extends State<LoginForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 LoginApi.createLoginResponse(phoneNumber.toString(),password.toString()).then((author){
-                  return null;
+                  return Navigator.pushNamed(context, HomePage.routeName);
                 });
               }
             },

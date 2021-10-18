@@ -16,6 +16,7 @@ class SignUpScreen extends StatelessWidget {
       backgroundColor: Colors.indigo,
       //ساخت تایتل اپ بار بالای صفحه
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           getTranslated(context, 'title')!,
           style: const TextStyle(
