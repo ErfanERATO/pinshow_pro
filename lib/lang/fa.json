@@ -43,5 +43,6 @@
     "verification_code_send_to" : "کد تایید به شماره شما ارسال گردید",
     "time_up_resend_code" : "فرصت شما تمام شد! ارسال مجدد کد",
     "add_sms_code_error" : "لطفا کد تاییدیه را وارد کنید",
-    "sms_code_label" : "کد پیامکی"
+    "sms_code_label" : "کد پیامکی",
+    "home_page_app_bar_title" : "پین‌شو"
 }

@@ -59,7 +59,9 @@
     "time_up_resend_code" : "Time is up! Resend the code",
 
     "add_sms_code_error" : "Please add your code",
-    "sms_code_label" : "Sms code"
+    "sms_code_label" : "Sms code",
+
+    "home_page_app_bar_title" : "pinshow"
 
 
 }

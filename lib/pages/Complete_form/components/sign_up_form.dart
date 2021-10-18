@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pinshow_pro/Components/default_button.dart';
 import 'package:pinshow_pro/Components/have_account_text.dart';
-import 'package:pinshow_pro/home/home.dart';
 import 'package:pinshow_pro/localization/language_constants.dart';
 import 'package:pinshow_pro/nework/complete_form_api.dart';
+import 'package:pinshow_pro/pages/HomePage/home_page_screen.dart';
 import 'package:pinshow_pro/size_config.dart';
 
 class SignUpForm extends StatefulWidget {
