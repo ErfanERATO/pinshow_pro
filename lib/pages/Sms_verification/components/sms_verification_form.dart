@@ -111,6 +111,7 @@ import 'package:pinshow_pro/nework/send_sms_code_api.dart';
 import 'package:pinshow_pro/pages/Complete_form/sign_up_screen.dart';
 import 'package:pinshow_pro/size_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timer_builder/timer_builder.dart';
 
 class OtpForm extends StatefulWidget {
   const OtpForm({
@@ -124,8 +125,16 @@ class OtpForm extends StatefulWidget {
 class _OtpFormState extends State<OtpForm> {
   final TextEditingController codeController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  late DateTime alert;
   String? code;
   String? phone;
+
+
+  @override
+  void initState() {
+    super.initState();
+    alert = DateTime.now().add(const Duration(minutes: 2));
+  }
 
   // FocusNode? pin2FocusNode;
   // FocusNode? pin3FocusNode;
@@ -280,12 +289,41 @@ class _OtpFormState extends State<OtpForm> {
             color: Colors.black12,
           ),
           SizedBox(height: getScreenHeight(25)),
-          TextButton(
-            child: Text(
-              getTranslated(context, 'time_up_resend_code')!,
-            ),
-            onPressed: () {
-              debugPrint("didn't get code pressed");
+          TimerBuilder.scheduled(
+            [alert],
+            builder: (context) {
+              // This function will be called once the alert time is reached
+              var now = DateTime.now();
+              var reached = now.compareTo(alert) >= 0;
+              final textStyle = Theme.of(context).textTheme.headline6;
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    !reached
+                        ? TimerBuilder.periodic(const Duration(seconds: 1),
+                        alignment: Duration.zero, builder: (context) {
+                          // This function will be called every second until the alert time
+                          var now = DateTime.now();
+                          var remaining = alert.difference(now);
+                          return Text(
+                            formatDuration(remaining),
+                            style: const TextStyle(color: Colors.black54),
+                          );
+                        })
+                        : TextButton(
+                      child: Text(
+                        getTranslated(context, 'time_up_resend_code')!,
+                        style: const TextStyle(color: Colors.deepOrangeAccent),
+                      ),
+                      onPressed: () {
+                        debugPrint("didn't get code pressed");
+                      },
+                    ),
+                  ],
+                ),
+              );
             },
           ),
           SizedBox(height: getScreenHeight(160)),
@@ -326,4 +364,14 @@ Future<String?> getPhoneNumber() async{
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? phone = prefs.getString("phone");
   return phone;
+}
+
+String formatDuration(Duration d) {
+  String f(int n) {
+    return n.toString().padLeft(2, '0');
+  }
+
+  // We want to round up the remaining time to the nearest second
+  d += const Duration(microseconds: 999999);
+  return "${f(d.inMinutes)}:${f(d.inSeconds % 60)}";
 }
