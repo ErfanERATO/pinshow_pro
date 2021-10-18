@@ -16,7 +16,7 @@ class _BodyState extends State<Body> {
         //ساخت بدنه برای نمایش فرم ها و دکمه‌ی ثبت
         child: Container(
           width: getScreenWidth(double.infinity),
-          height: getScreenHeight(733),
+          height: getScreenHeight(707),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
