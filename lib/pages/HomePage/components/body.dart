@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pinshow_pro/helper/db_helper.dart';
 import 'package:pinshow_pro/size_config.dart';
 
 class Body extends StatefulWidget {
@@ -9,22 +10,21 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SafeArea(
-        //ساخت بدنه برای نمایش فرم ها و دکمه‌ی ثبت
-        child: Container(
-          width: getScreenWidth(double.infinity),
-          height: getScreenHeight(707),
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-            color: Colors.white,
+    dynamic db = DBHelper.database();
+    debugPrint(db.readGroup());
+    return SafeArea(
+      //ساخت بدنه برای نمایش فرم ها و دکمه‌ی ثبت
+      child: Container(
+        width: getScreenWidth(double.infinity),
+        height: getScreenHeight(707),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
+          color: Colors.white,
         ),
       ),
     );
