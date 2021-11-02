@@ -72,9 +72,8 @@ class DataBaseHelper {
     await db.update(
       tableName,
       data.toMap(),
-      where: 'groups = ?',
-      whereArgs: [data.groups],
+      where: 'token = ?',
+      whereArgs: [data.token],
     );
   }
-
 }
