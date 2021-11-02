@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pinshow_pro/localization/language_constants.dart';
-import 'package:pinshow_pro/pages/Complete_form/sign_up_screen.dart';
+import 'package:pinshow_pro/pages/verify_phone/verify_phone_2_screen.dart';
 import 'package:pinshow_pro/size_config.dart';
 
 class NoAccountText extends StatelessWidget {
@@ -10,6 +10,7 @@ class NoAccountText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     //چون قراره در یک ردیف نمایش داده بشن باید داخل Row قرار بگیرن
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +26,7 @@ class NoAccountText extends StatelessWidget {
         GestureDetector(
           onTap: () {
             debugPrint("create account pressed");
-            Navigator.pushNamed(context, SignUpScreen.routeName);
+            Navigator.pushNamed(context, VerifyPhone2.routeName);
           },
           child: Text(
             getTranslated(context, 'Do_not_have_an_account_A')!,

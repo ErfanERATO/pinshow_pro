@@ -49,35 +49,7 @@ class _BottomVerifyFormState extends State<BottomVerifyForm> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    TextFormField(
-                      controller: phoneNumberController,
-                      onSaved: (newValue) => phoneNumber = newValue!,
-                      onChanged: (value) {
-                        setState(() {
-                          phoneNumber = value;
-                        });
-                      },
-                      //اعتبار سنجی فرم
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return getTranslated(context, 'add_number_error')!;
-                        } else if (value.length < 10) {
-                          return getTranslated(
-                              context, 'phone_number_to_short_error')!;
-                        } else {
-                          return null;
-                        }
-                      },
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(10),
-                      ],
-                      decoration: InputDecoration(
-                        labelText:
-                            getTranslated(context, 'phone_number_label')!,
-                        suffixIcon: const Icon(Icons.call),
-                        hintText: "9024040897",
-                      ),
-                    ),
+                    buildPhoneNumberFormField(context),
                     SizedBox(height: getScreenHeight(60)),
                     DefaultButton(
                       text: getTranslated(context, 'button_text')!,
@@ -105,6 +77,38 @@ class _BottomVerifyFormState extends State<BottomVerifyForm> {
         ),
       ),
     );
+  }
+
+  //گرفتن شماره تلفن کاربر
+  TextFormField buildPhoneNumberFormField(BuildContext context) {
+    return TextFormField(
+                    controller: phoneNumberController,
+                    onSaved: (newValue) => phoneNumber = newValue!,
+                    onChanged: (value) {
+                      setState(() {
+                        phoneNumber = value;
+                      });
+                    },
+                    //اعتبار سنجی فرم
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return getTranslated(context, 'add_number_error')!;
+                      } else if (value.length < 10) {
+                        return getTranslated(
+                            context, 'phone_number_to_short_error')!;
+                      } else {
+                        return null;
+                      }
+                    },
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(10),
+                    ],
+                    decoration: InputDecoration(
+                      labelText:
+                          getTranslated(context, 'phone_number_label')!,
+                      suffixIcon: const Icon(Icons.call),
+                    ),
+                  );
   }
 
   void savePhone() {

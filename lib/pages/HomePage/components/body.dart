@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pinshow_pro/helper/db_helper.dart';
 import 'package:pinshow_pro/size_config.dart';
 
 class Body extends StatefulWidget {
@@ -12,8 +11,6 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    dynamic db = DBHelper.database();
-    debugPrint(db.readGroup());
     return SafeArea(
       //ساخت بدنه برای نمایش فرم ها و دکمه‌ی ثبت
       child: Container(

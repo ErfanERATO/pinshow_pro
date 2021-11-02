@@ -53,40 +53,7 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(height: getScreenHeight(50)),
           Column(
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: getScreenWidth(10)),
-                  ),
-                  GestureDetector(
-                    child: const Text(
-                      "حریم خصوصی",
-                      style: TextStyle(
-                        color: Colors.deepOrange,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onTap: () {
-                      debugPrint("privacy in pressed");
-                    },
-                  ),
-                  const Text("  و "),
-                  GestureDetector(
-                    child: const Text(
-                      "  قوانین استفاده از نرم‌افزار ",
-                      style: TextStyle(
-                        color: Colors.deepOrange,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onTap: () {
-                      debugPrint("rules in pressed");
-                    },
-                  ),
-                  const Text("با ثبت نام شما تمامی"),
-                ],
-              ),
+              policyRuelsText(),
               SizedBox(
                 height: getScreenHeight(4),
               ),
@@ -120,6 +87,43 @@ class _SignUpFormState extends State<SignUpForm> {
         ],
       ),
     );
+  }
+
+  Row policyRuelsText() {
+    return Row(
+              children: <Widget>[
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: getScreenWidth(10)),
+                ),
+                GestureDetector(
+                  child: const Text(
+                    "حریم خصوصی",
+                    style: TextStyle(
+                      color: Colors.deepOrange,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onTap: () {
+                    debugPrint("privacy in pressed");
+                  },
+                ),
+                const Text("  و "),
+                GestureDetector(
+                  child: const Text(
+                    "  قوانین استفاده از نرم‌افزار ",
+                    style: TextStyle(
+                      color: Colors.deepOrange,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onTap: () {
+                    debugPrint("rules in pressed");
+                  },
+                ),
+                const Text("با ثبت نام شما تمامی"),
+              ],
+            );
   }
 
   //فیلد دریافت تاییدیه پسوور ورودی کاربر
