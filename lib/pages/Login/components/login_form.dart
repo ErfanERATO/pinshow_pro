@@ -117,7 +117,6 @@ class _LoginFormState extends State<LoginForm> {
       decoration: InputDecoration(
         labelText: getTranslated(context, 'phone_number_label')!,
         suffixIcon: const Icon(Icons.call),
-        hintText: "9024040897",
       ),
     );
   }
