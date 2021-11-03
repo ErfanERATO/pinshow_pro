@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CompleteFormAPI {
   static const String completeFormUrl =
-      'http://testapi.pinshow.ir/api/v1/register';
+      'https://testapi.pinshow.ir/api/v1/register';
 
   static Future<CompleteFormResponse> createCompleteForm(
     String phone,
