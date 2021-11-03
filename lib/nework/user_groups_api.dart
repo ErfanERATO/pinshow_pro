@@ -13,7 +13,6 @@ class UserGroups {
       headers: <String, String>{
         'Accept': 'application/json',
         'X-localization': 'en',
-        // 'Expect': '100-Continue',
       },
     );
     if (response.statusCode == 200) {
