@@ -27,7 +27,7 @@ class _SignUpFormState extends State<SignUpForm> {
   String? name;
   String? email;
   String? password;
-  String? password_confirmation;
+  // String? password_confirmation;
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +47,10 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(height: getScreenHeight(30)),
           //نمایش فیلد وارد کردن گذرواژه توسط کاربر
           buildPasswordFormField(),
-          SizedBox(height: getScreenHeight(30)),
-          //نمایش فیلد وارد کردن تاییدیه گذرواژه توسط کاربر
-          buildConformPassFormField(),
           SizedBox(height: getScreenHeight(50)),
           Column(
             children: <Widget>[
-              policyRuelsText(),
+              policyRulesText(),
               SizedBox(
                 height: getScreenHeight(4),
               ),
@@ -74,7 +71,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   name.toString(),
                   email.toString(),
                   password.toString(),
-                  password_confirmation.toString(),
+                  // password_confirmation.toString(),
                 ).then((author) {
                   return null;
                 });
@@ -89,7 +86,7 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  Row policyRuelsText() {
+  Row policyRulesText() {
     return Row(
               children: <Widget>[
                 Padding(
@@ -126,27 +123,6 @@ class _SignUpFormState extends State<SignUpForm> {
             );
   }
 
-  //فیلد دریافت تاییدیه پسوور ورودی کاربر
-  TextFormField buildConformPassFormField() {
-    return TextFormField(
-      controller: confirmPassController,
-      obscureText: true,
-      onSaved: (newValue) => password_confirmation = newValue!,
-      //اعتبار سنجی فرم
-      validator: (value) {
-        if (value!.isEmpty) {
-          return getTranslated(context, 'confirm_password_error')!;
-        } else {
-          return null;
-        }
-      },
-      decoration: InputDecoration(
-        labelText: getTranslated(context, 'confirm_password_label_text')!,
-        suffixIcon: const Icon(Icons.lock),
-      ),
-    );
-  }
-
   //فیلد دریافت پسوورد ورودی کاربر
   TextFormField buildPasswordFormField() {
     return TextFormField(
@@ -157,7 +133,7 @@ class _SignUpFormState extends State<SignUpForm> {
       validator: (value) {
         if (value!.isEmpty) {
           return getTranslated(context, 'enter_password_error')!;
-        } else if (value.length <= 6) {
+        } else if (value.length <= 8) {
           return getTranslated(context, 'enter_valid_password_error')!;
         } else {
           return null;
@@ -176,17 +152,17 @@ class _SignUpFormState extends State<SignUpForm> {
       controller: emailController,
       onSaved: (newValue) => email = newValue!,
       // اعتبار سنجی فرم
-      // validator: (value){
-      //   const pattern = r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-      //   final regExp = RegExp(pattern);
-      //   if(regExp.hasMatch(value!)){
-      //     return getTranslated(context, 'entered_email_invalid_error')!;
-      //   }else if(value.isEmpty){
-      //     return getTranslated(context, 'entered_email_error')!;
-      //   }else{
-      //   return null;
-      //   }
-      // },
+      validator: (value){
+        const pattern = r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+        final regExp = RegExp(pattern);
+        if(regExp.hasMatch(value!)){
+          return getTranslated(context, 'entered_email_invalid_error')!;
+        }else if(value.isEmpty){
+          return getTranslated(context, 'entered_email_error')!;
+        }else{
+        return null;
+        }
+      },
       decoration: InputDecoration(
         labelText: getTranslated(context, 'email')!,
         suffixIcon: const Icon(Icons.email),
@@ -216,7 +192,6 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  //_____________________________________________________
   TextFormField buildCodeFormField() {
     return TextFormField(
       controller: codeController,

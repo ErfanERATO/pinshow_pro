@@ -45,11 +45,11 @@ class DataBaseHelper {
 
   //چرا؟ برای وارد کردن و ذخیره کردن یوزر
   //  پارامتر های ورودی مپ دیتا و مپ تیبل
-  Future<void> insertUser(Map<String, dynamic> information) async {
+  Future<void> insertGroupUser(Map<String, dynamic> data) async {
     final db = await DataBaseHelper.database();
     db.insert(
       tableName,
-      information,
+      data,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }

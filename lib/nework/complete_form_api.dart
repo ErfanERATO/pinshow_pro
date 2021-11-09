@@ -2,11 +2,10 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:pinshow_pro/model/complete_form_response.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CompleteFormAPI {
   static const String completeFormUrl =
-      'https://testapi.pinshow.ir/api/v1/register';
+      'http://testapi.pinshow.ir/api/v1/register';
 
   static Future<CompleteFormResponse> createCompleteForm(
     String phone,
@@ -14,7 +13,7 @@ class CompleteFormAPI {
     String name,
     String email,
     String password,
-    String password_confirmation,
+    // String password_confirmation,
   ) async {
     final Response response = await post(
       Uri.parse(completeFormUrl),
@@ -30,7 +29,7 @@ class CompleteFormAPI {
         "name": name,
         "email": email,
         "password": password,
-        "password_confirmation": password_confirmation
+        // "password_confirmation": password_confirmation
       },
     );
     if (response.statusCode == 200) {
@@ -41,11 +40,5 @@ class CompleteFormAPI {
       print(response.statusCode);
       throw Exception("Can't Send information");
     }
-  }
-
-  _getToken() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var token = localStorage.getString('token');
-    return '?token=$token';
   }
 }

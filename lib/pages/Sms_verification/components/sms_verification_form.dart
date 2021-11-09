@@ -111,6 +111,8 @@ import 'package:pinshow_pro/nework/send_sms_code_api.dart';
 import 'package:pinshow_pro/pages/Complete_form/sign_up_screen.dart';
 import 'package:pinshow_pro/size_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timer_builder/timer_builder.dart';
 
 class OtpForm extends StatefulWidget {
@@ -124,49 +126,17 @@ class OtpForm extends StatefulWidget {
 
 class _OtpFormState extends State<OtpForm> {
   final TextEditingController codeController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   late DateTime alert;
   String? code;
   String? phone;
-
 
   @override
   void initState() {
     super.initState();
     alert = DateTime.now().add(const Duration(minutes: 2));
   }
-
-  // FocusNode? pin2FocusNode;
-  // FocusNode? pin3FocusNode;
-  // FocusNode? pin4FocusNode;
-  // FocusNode? pin5FocusNode;
-  // FocusNode? pin6FocusNode;
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   pin2FocusNode = FocusNode();
-  //   pin3FocusNode = FocusNode();
-  //   pin4FocusNode = FocusNode();
-  //   pin5FocusNode = FocusNode();
-  //   pin6FocusNode = FocusNode();
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   pin2FocusNode!.dispose();
-  //   pin3FocusNode!.dispose();
-  //   pin4FocusNode!.dispose();
-  //   pin5FocusNode!.dispose();
-  //   pin6FocusNode!.dispose();
-  // }
-  //
-  // void nextField(String value, FocusNode? focusNode) {
-  //   if (value.length == 1) {
-  //     focusNode!.requestFocus();
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -175,96 +145,17 @@ class _OtpFormState extends State<OtpForm> {
       child: Column(
         children: [
           SizedBox(height: SizeConfig.screenHeight * 0.15),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   children: [
-          //     SizedBox(
-          //       width: getScreenWidth(50),
-          //       child: TextFormField(
-          //         autofocus: true,
-          //         obscureText: true,
-          //         style: const TextStyle(fontSize: 24),
-          //         keyboardType: TextInputType.number,
-          //         textAlign: TextAlign.center,
-          //         decoration: otpInputDecoration,
-          //         onChanged: (value) {
-          //           nextField(value, pin2FocusNode);
-          //         },
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: getScreenWidth(50),
-          //       child: TextFormField(
-          //         focusNode: pin2FocusNode,
-          //         obscureText: true,
-          //         style: const TextStyle(fontSize: 24),
-          //         keyboardType: TextInputType.number,
-          //         textAlign: TextAlign.center,
-          //         decoration: otpInputDecoration,
-          //         onChanged: (value) => nextField(value, pin3FocusNode),
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: getScreenWidth(50),
-          //       child: TextFormField(
-          //         focusNode: pin3FocusNode,
-          //         obscureText: true,
-          //         style: const TextStyle(fontSize: 24),
-          //         keyboardType: TextInputType.number,
-          //         textAlign: TextAlign.center,
-          //         decoration: otpInputDecoration,
-          //         onChanged: (value) => nextField(value, pin4FocusNode),
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: getScreenWidth(50),
-          //       child: TextFormField(
-          //         focusNode: pin4FocusNode,
-          //         obscureText: true,
-          //         style: const TextStyle(fontSize: 24),
-          //         keyboardType: TextInputType.number,
-          //         textAlign: TextAlign.center,
-          //         decoration: otpInputDecoration,
-          //         onChanged: (value) => nextField(value, pin5FocusNode),
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: getScreenWidth(50),
-          //       child: TextFormField(
-          //         focusNode: pin5FocusNode,
-          //         obscureText: true,
-          //         style: const TextStyle(fontSize: 24),
-          //         keyboardType: TextInputType.number,
-          //         textAlign: TextAlign.center,
-          //         decoration: otpInputDecoration,
-          //         onChanged: (value) => nextField(value, pin6FocusNode),
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: getScreenWidth(50),
-          //       child: TextFormField(
-          //         focusNode: pin4FocusNode,
-          //         obscureText: true,
-          //         style: const TextStyle(fontSize: 24),
-          //         keyboardType: TextInputType.number,
-          //         textAlign: TextAlign.center,
-          //         decoration: otpInputDecoration,
-          //         onChanged: (value) {
-          //           if (value.length == 1) {
-          //             pin4FocusNode!.unfocus();
-          //             // Then you need to check is the code is correct or not
-          //           }
-          //         },
-          //       ),
-          //     ),
-          //   ],
-          // ),
           Container(
             margin: const EdgeInsets.all(30.0),
             padding: const EdgeInsets.all(10.0),
             child: TextFormField(
               controller: codeController,
               onSaved: (newValue) => code = newValue!,
+              onChanged: (value) {
+                setState(() {
+                  code = value;
+                });
+              },
               //اعتبار سنجی فرم
               validator: (value) {
                 if (value!.isEmpty) {
@@ -283,6 +174,7 @@ class _OtpFormState extends State<OtpForm> {
               ),
             ),
           ),
+          // buildPhoneNumberFormField(context),
           Divider(
             height: getScreenHeight(10),
             thickness: 3,
@@ -303,29 +195,31 @@ class _OtpFormState extends State<OtpForm> {
                   children: <Widget>[
                     !reached
                         ? TimerBuilder.periodic(const Duration(seconds: 1),
-                        alignment: Duration.zero, builder: (context) {
-                          // This function will be called every second until the alert time
-                          var now = DateTime.now();
-                          var remaining = alert.difference(now);
-                          return Text(
-                            formatDuration(remaining),
-                            style: const TextStyle(color: Colors.black54),
-                          );
-                        })
+                            alignment: Duration.zero, builder: (context) {
+                            // This function will be called every second until the alert time
+                            var now = DateTime.now();
+                            var remaining = alert.difference(now);
+                            return Text(
+                              formatDuration(remaining),
+                              style: const TextStyle(color: Colors.black54),
+                            );
+                          })
                         : TextButton(
-                      child: Text(
-                        getTranslated(context, 'time_up_resend_code')!,
-                        style: const TextStyle(color: Colors.deepOrangeAccent),
-                      ),
-                      onPressed: () {
-                        debugPrint("didn't get code pressed");
-                      },
-                    ),
+                            child: Text(
+                              getTranslated(context, 'time_up_resend_code')!,
+                              style: const TextStyle(
+                                  color: Colors.deepOrangeAccent),
+                            ),
+                            onPressed: () {
+                              debugPrint("didn't get code pressed");
+                            },
+                          ),
                   ],
                 ),
               );
             },
           ),
+          buildPhoneNumberFormField(context),
           SizedBox(height: getScreenHeight(160)),
           DefaultButton(
             text: getTranslated(context, 'button_text')!,
@@ -333,10 +227,14 @@ class _OtpFormState extends State<OtpForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // Navigator.pushNamed(context, SignUpScreen.routeName);
-                SendSmsCodeAPI.createSendSmsCode(code.toString())
+                // SendSmsCodeAPI.createSendSmsCode(code.toString())
+                SendSmsCodeAPI.createSendSmsCode(
+                        code.toString(), phone.toString())
                     .then((author) {
                   return saveSmsCode();
                 });
+                debugPrint(phone);
+                debugPrint(code);
               }
             },
           ),
@@ -345,25 +243,39 @@ class _OtpFormState extends State<OtpForm> {
     );
   }
 
-  void saveSmsCode() {
-    String code = codeController.text;
-    saveConfirmSmsCode(code).then((bool committed) {
-      Navigator.pushNamed(context, SignUpScreen.routeName);
-      getPhoneNumber();
-    });
+  //گرفتن شماره تلفن کاربر
+  TextFormField buildPhoneNumberFormField(BuildContext context) {
+    return TextFormField(
+      controller: phoneController,
+      onSaved: (newValue) => phone = newValue!,
+      onChanged: (value) {
+        setState(() {
+          phone = value;
+        });
+      },
+      //اعتبار سنجی فرم
+      validator: (value) {
+        if (value!.isEmpty) {
+          return getTranslated(context, 'add_number_error')!;
+        } else if (value.length < 10) {
+          return getTranslated(context, 'phone_number_to_short_error')!;
+        } else {
+          return null;
+        }
+      },
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(10),
+      ],
+      decoration: InputDecoration(
+        labelText: getTranslated(context, 'phone_number_label')!,
+        suffixIcon: const Icon(Icons.call),
+      ),
+    );
   }
-}
 
-Future<bool> saveConfirmSmsCode(String code) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setString("code", code);
-  return prefs.commit();
-}
-
-Future<String?> getPhoneNumber() async{
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? phone = prefs.getString("phone");
-  return phone;
+  void saveSmsCode() {
+    Navigator.pushNamed(context, SignUpScreen.routeName);
+  }
 }
 
 String formatDuration(Duration d) {

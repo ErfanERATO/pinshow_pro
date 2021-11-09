@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pinshow_pro/dataBaseHelper/database_helper.dart';
+import 'package:pinshow_pro/nework/user_groups_api.dart';
 import 'package:pinshow_pro/size_config.dart';
 
 class Body extends StatefulWidget {
@@ -9,8 +11,23 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+
+  // var databaseHelper;
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   DataBaseHelper databaseHelper = DataBaseHelper();
+  //   databaseHelper.insertGroupUser();
+  // }
+
   @override
   Widget build(BuildContext context) {
+    // //فراخونی api گروه ها
+    UserGroupsAPI.createUserGroups().then((author) {
+      return null;
+    });
+
     return SafeArea(
       //ساخت بدنه برای نمایش فرم ها و دکمه‌ی ثبت
       child: Container(

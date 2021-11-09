@@ -10,7 +10,7 @@ class Body extends StatelessWidget {
       child: SafeArea(
         child: Container(
           width: getScreenWidth(double.infinity),
-          height: getScreenHeight(733),
+          height: getScreenHeight(750),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),

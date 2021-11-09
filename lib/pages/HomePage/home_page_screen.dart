@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: SizedBox(
         height: 55,
         child: BottomAppBar(
-          shape: CircularNotchedRectangle(),
+          shape: const CircularNotchedRectangle(),
           color: Colors.indigo,
           elevation: 2,
           child: Row(
