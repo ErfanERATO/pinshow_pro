@@ -12,15 +12,6 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
 
-  // var databaseHelper;
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   DataBaseHelper databaseHelper = DataBaseHelper();
-  //   databaseHelper.insertGroupUser();
-  // }
-
   @override
   Widget build(BuildContext context) {
     // //فراخونی api گروه ها
