@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pinshow_pro/localization/language_constants.dart';
+import 'package:pinshow_pro/model/groups_data.dart';
+import 'package:pinshow_pro/nework/user_groups_api.dart';
 import 'package:pinshow_pro/pages/HomePage/components/body.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -38,7 +43,15 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.deepOrange,
         child: const Icon(CupertinoIcons.placemark),
-        onPressed: (){},
+        onPressed: () async {
+          debugPrint("FAB pressed");
+          // UserGroupsAPI.createUserGroupsResponse().then((author){
+          //   return null;
+          // });
+          List groupDatas = await fetchPosts(http.Client());
+          // this will print the id and the title of posts
+          groupDatas.forEach((group) => print('Group name: ${group.name}  |  Post title: ${group.id}'));
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: SizedBox(
@@ -56,7 +69,9 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                   size: 27,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  debugPrint("Setting pressed");
+                },
               ),
               IconButton(
                 icon: const Icon(
@@ -64,7 +79,9 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                   size: 27,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  debugPrint("Location pressed");
+                },
               ),
               const SizedBox(
                 width: 25,
@@ -75,7 +92,9 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                   size: 27,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  debugPrint("Chat pressed");
+                },
               ),
               IconButton(
                 icon: const Icon(
@@ -83,7 +102,9 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                   size: 27,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  debugPrint("place pressed");
+                },
               ),
             ],
           ),

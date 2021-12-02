@@ -19,21 +19,6 @@ class LoginResponse {
   String message;
   Data data;
 
-
-  Map<String, dynamic> toMap() {
-    return {
-      'success': success,
-      'message': message,
-      'data': data,
-    };
-  }
-
-  fromMap(Map<String, dynamic> map) {
-    success = map["success"];
-    message = map["message"];
-    data = map["data"];
-  }
-
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
     success: json["success"],
     message: json["message"],
@@ -58,22 +43,6 @@ class Data {
   User user;
   List<Group> groups;
 
-
-  Map<String, dynamic> toMap() {
-    return {
-      'token': token,
-      'user': user,
-      'groups': groups,
-    };
-  }
-
-  fromMap(Map<String, dynamic> map) {
-    token = map["token"];
-    user = map["user"];
-    groups = map["groups"];
-  }
-
-
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     token: json["token"],
     user: User.fromJson(json["user"]),
@@ -95,8 +64,6 @@ class Group {
     required this.privateStatus,
     required this.groupDefault,
     this.groupPhoto,
-    required this.generatedCodeTime,
-    required this.expiredCodeTime,
   });
 
   String name;
@@ -105,32 +72,6 @@ class Group {
   String privateStatus;
   String groupDefault;
   dynamic groupPhoto;
-  int generatedCodeTime;
-  String expiredCodeTime;
-
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'id': id,
-      'inviteCode': inviteCode,
-      'privateStatus': privateStatus,
-      'groupDefault': groupDefault,
-      'groupPhoto': groupPhoto,
-      'generatedCodeTime': generatedCodeTime,
-      'expiredCodeTime': expiredCodeTime,
-    };
-  }
-
-  fromMap(Map<String, dynamic> map) {
-    name = map["name"];
-    id = map["id"];
-    inviteCode = map["inviteCode"];
-    privateStatus = map["privateStatus"];
-    groupDefault = map["groupDefault"];
-    groupPhoto = map["groupPhoto"];
-    generatedCodeTime = map["generatedCodeTime"];
-    expiredCodeTime = map["expiredCodeTime"];
-  }
 
   factory Group.fromJson(Map<String, dynamic> json) => Group(
     name: json["name"],
@@ -139,8 +80,6 @@ class Group {
     privateStatus: json["private_status"],
     groupDefault: json["default"],
     groupPhoto: json["group_photo"],
-    generatedCodeTime: json["generated_code_time"],
-    expiredCodeTime: json["expired_code_time"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -150,39 +89,21 @@ class Group {
     "private_status": privateStatus,
     "default": groupDefault,
     "group_photo": groupPhoto,
-    "generated_code_time": generatedCodeTime,
-    "expired_code_time": expiredCodeTime,
   };
 }
 
 class User {
   User({
     required this.name,
-    required this.email,
+    this.email,
     required this.phone,
     this.userProfilePath,
   });
 
   String name;
-  String email;
+  dynamic email;
   String phone;
   dynamic userProfilePath;
-
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'email': email,
-      'phone': phone,
-      'userProfilePath': userProfilePath,
-    };
-  }
-
-  fromMap(Map<String, dynamic> map) {
-    name = map["name"];
-    email = map["email"];
-    phone = map["phone"];
-    userProfilePath = map["userProfilePath"];
-  }
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     name: json["name"],
